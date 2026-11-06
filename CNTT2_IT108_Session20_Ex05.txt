@@ -1,0 +1,62 @@
+# BÀI 5: XÂY DỰNG CƠ CHẾ XÁC THỰC AN TOÀN CHO CRYPTO WALLET
+
+## 1. Vấn đề
+
+Ví điện tử Crypto Wallet cần có quy trình đăng nhập an toàn để bảo vệ tài sản của người dùng. Nếu chỉ sử dụng mật khẩu thì hacker vẫn có thể đăng nhập khi lấy được mật khẩu.
+
+Vì vậy, hệ thống cần kết hợp nhiều phương pháp bảo mật khác nhau.
+
+## 2. Thiết kế quy trình đăng nhập
+
+Hệ thống gồm 3 lớp bảo mật:
+
+### Lớp 1: Xác thực người dùng
+- Người dùng nhập tên đăng nhập và mật khẩu.
+- Xác thực thêm mã OTP bằng Google Authenticator.
+- Có thể sử dụng vân tay hoặc nhận diện khuôn mặt.
+- Nếu đăng nhập sai nhiều lần thì tài khoản sẽ tạm thời bị khóa.
+
+### Lớp 2: Bảo vệ thiết bị và phiên đăng nhập
+- Mã hóa dữ liệu quan trọng bằng Secure Enclave.
+- Không lưu mật khẩu dưới dạng văn bản thông thường.
+- Tự động đăng xuất khi người dùng không hoạt động.
+- Chỉ cho phép thiết bị đáng tin cậy truy cập tài khoản.
+
+### Lớp 3: Bảo vệ giao dịch
+- Khi chuyển tiền, hệ thống yêu cầu xác nhận lại.
+- Kiểm tra địa chỉ ví và số tiền trước khi giao dịch.
+- Private Key được bảo vệ trong vùng lưu trữ an toàn.
+- Gửi cảnh báo khi phát hiện giao dịch bất thường.
+
+## 3. Sơ đồ kiến trúc
+
+Quy trình hoạt động:
+
+1. Người dùng nhập mật khẩu.
+2. Hệ thống kiểm tra OTP và sinh trắc học.
+3. Thiết bị xác thực và bảo vệ phiên đăng nhập.
+4. Người dùng xác nhận giao dịch.
+5. Hệ thống kiểm tra và cho phép thực hiện giao dịch nếu hợp lệ.
+
+Ba lớp bảo mật phối hợp với nhau để hạn chế hacker truy cập tài khoản, kể cả khi đã biết mật khẩu.
+
+## 4. Xử lý tình huống đặc biệt (Edge Case)
+
+**Tình huống:** Người dùng đang ở trên máy bay, không có Internet hoặc sóng điện thoại. Làm sao để lấy OTP?
+
+Cách giải quyết:
+
+- Sử dụng Google Authenticator để tạo mã TOTP ngay trên điện thoại. Mã này vẫn tạo được khi không có Internet.
+- Đồng bộ thời gian trên điện thoại để mã OTP chính xác.
+- Nếu không sử dụng được ứng dụng OTP thì có thể dùng mã dự phòng đã tạo trước đó hoặc khóa bảo mật phần cứng.
+- Nếu không có Internet thì chưa thể hoàn tất đăng nhập trực tuyến. Người dùng cần kết nối lại mạng để hệ thống xác thực.
+
+## 5. Kết quả đạt được
+
+Thiết kế giúp tăng độ an toàn cho Crypto Wallet nhờ kết hợp mật khẩu, OTP, sinh trắc học và mã hóa dữ liệu.
+
+Khi một lớp bảo mật bị vượt qua, các lớp còn lại vẫn giúp bảo vệ tài khoản và tài sản của người dùng.
+
+## 6. Kết luận
+
+Hệ thống xác thực 3 lớp giúp giảm nguy cơ bị đánh cắp tài khoản, bảo vệ thông tin cá nhân và hạn chế các giao dịch trái phép. Đây là giải pháp cần thiết đối với một ứng dụng ví điện tử.
